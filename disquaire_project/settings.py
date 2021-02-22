@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -32,7 +31,7 @@ else:
     DEBUG = True
 
 
-ALLOWED_HOSTS = ['disquaire.herokuapp.com']
+ALLOWED_HOSTS = ['disquaire.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -58,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'disquaire_project.urls'
@@ -87,11 +86,11 @@ WSGI_APPLICATION = 'disquaire_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql', # on utilise l'adaptateur postgresql
-        'NAME': 'disquaire', # le nom de notre base de données créée précédemment
-        'USER': 'celinems', # attention : remplacez par votre nom d'utilisateur !!
-        'PASSWORD': '',
-        'HOST': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # on utilise l'adaptateur postgresql_psycopg2
+        'NAME': 'disquaire_db', # le nom de notre base de données créée précédemment
+        'USER': 'disquaire_psql_usr', # attention : remplacez par votre nom d'utilisateur !!
+        'PASSWORD': 'd!5qu4!R3',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -142,8 +141,8 @@ INTERNAL_IPS = ['127.0.0.1']
 
 if os.environ.get('ENV') == 'PRODUCTION':
 
-    STATIC_ROOT = os.path.join(BASE_ROOT, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
